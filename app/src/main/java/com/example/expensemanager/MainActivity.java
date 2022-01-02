@@ -17,8 +17,12 @@ public class MainActivity extends AppCompatActivity {
 
     BottomNavigationView bottomNavigationView;
 
+    //fab1 is plus
+    //fab2 is income
+    //fab3 is expenses
     FloatingActionButton fab1, fab2, fab3;
     Boolean isTrue = true;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,6 +56,22 @@ public class MainActivity extends AppCompatActivity {
         fab1 = findViewById(R.id.add);
         fab2 = findViewById(R.id.money);
         fab3 = findViewById(R.id.shop);
+
+        fab2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, Income.class);
+                startActivity(intent);
+            }
+        });
+
+        fab3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, Expenses.class);
+                startActivity(intent);
+            }
+        });
 
         final Animation rotate = AnimationUtils.loadAnimation(this, R.anim.rotate);
         Animation rotateBack = AnimationUtils.loadAnimation(this, R.anim.rotate_back);
