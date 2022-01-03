@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">Expense Manager</string>
+
+    <string-array name="category">
+        <item>Food</item>
+        <item>Bill</item>
+        <item>Transport</item>
+    </string-array>
 </resources>
