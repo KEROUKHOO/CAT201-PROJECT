@@ -7,18 +7,21 @@
     tools:context=".About">
 
     <TextView
+        android:id="@+id/txtAbout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="About"
-        android:textSize="50sp"
-        android:textStyle="bold"
         android:gravity="center"
+        android:layout_marginTop="15dp"
+        android:text="About"
         android:textColor="@color/black"
-        android:id="@+id/txtAbout" />
+        android:textSize="50sp"
+        android:textStyle="bold" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/txtAbout"
+        android:padding="15dp"
         android:text="Expense Manager is a mobile application that serves to
 assist users in managing their personal finances in order to be
 financially secure. Users will be able to keep track of all their
@@ -26,20 +29,17 @@ income and expenses regardless of time and place. It helps users
 to manage their expenses in an easier and more organized way
 thus providing them a clearer picture of their spending habits and
 financial status"
-        android:textSize="25sp"
         android:textColor="@color/black"
-        android:layout_below="@+id/txtAbout"
-        android:padding="15dp" />
+        android:textSize="23sp" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottom_navigator"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/bottom_navigator"
-        app:itemBackground="@color/purple_500"
-        app:itemTextColor="@drawable/selector"
-        app:itemIconTint="@drawable/selector"
-        app:menu="@menu/menu"
         android:layout_alignParentBottom="true"
-        />
+        app:itemBackground="@color/purple_500"
+        app:itemIconTint="@drawable/selector"
+        app:itemTextColor="@drawable/selector"
+        app:menu="@menu/menu" />
 
 </RelativeLayout>
