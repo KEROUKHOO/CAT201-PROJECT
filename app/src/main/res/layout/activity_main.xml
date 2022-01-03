@@ -27,8 +27,8 @@
         android:layout_above="@+id/add"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
-        android:layout_marginEnd="30dp"
-        android:layout_marginRight="30dp"
+        android:layout_marginEnd="25dp"
+        android:layout_marginRight="25dp"
         android:layout_marginBottom="9dp"
         android:backgroundTint="#8c8c8c"
         android:clickable="false"
@@ -43,23 +43,14 @@
         android:layout_above="@+id/money"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
-        android:layout_marginEnd="30dp"
-        android:layout_marginRight="30dp"
-        android:layout_marginBottom="10dp"
+        android:layout_marginEnd="25dp"
+        android:layout_marginRight="25dp"
+        android:layout_marginBottom="9dp"
         android:backgroundTint="#8c8c8c"
         android:clickable="false"
         android:visibility="invisible"
         app:srcCompat="@drawable/shop"
         tools:ignore="UnknownId" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Home"
-        android:textSize="50sp"
-        android:textStyle="bold"
-        android:layout_centerInParent="true"
-        android:textColor="@color/black" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:layout_width="match_parent"
