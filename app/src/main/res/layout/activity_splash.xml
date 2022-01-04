@@ -31,16 +31,31 @@
 
     <com.google.android.material.progressindicator.LinearProgressIndicator
         android:id="@+id/splash_progress_bar"
-        android:indeterminate="true"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="71dp"
         android:layout_marginTop="488dp"
         android:layout_marginEnd="71dp"
         android:layout_marginBottom="142dp"
+        android:indeterminate="true"
         app:layout_constraintBottom_toTopOf="@+id/splash_version_text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/splash_quote_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="25dp"
+        android:text='"Budgetting has only one rule:
+do not go over budget."'
+        android:textSize="15dp"
+        android:textStyle="italic"
+        android:textColor="@color/purple_500"
+        app:layout_constraintBottom_toTopOf="@+id/splash_version_text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
