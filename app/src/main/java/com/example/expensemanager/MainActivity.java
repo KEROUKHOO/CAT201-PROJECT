@@ -53,9 +53,9 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        fab1 = findViewById(R.id.add);
-        fab2 = findViewById(R.id.money);
-        fab3 = findViewById(R.id.shop);
+        fab1 = findViewById(R.id.ma_add_fab);
+        fab2 = findViewById(R.id.ma_income_fab);
+        fab3 = findViewById(R.id.ma_expenses_fab);
 
         fab2.setOnClickListener(new View.OnClickListener() {
             @Override

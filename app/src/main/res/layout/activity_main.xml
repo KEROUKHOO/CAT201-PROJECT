@@ -7,7 +7,7 @@
     tools:context=".MainActivity">
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/add"
+        android:id="@+id/ma_add_fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
@@ -21,10 +21,10 @@
         tools:ignore="SpeakableTextPresentCheck" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/money"
+        android:id="@+id/ma_income_fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/add"
+        android:layout_above="@+id/ma_add_fab"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_marginEnd="25dp"
@@ -37,10 +37,10 @@
         tools:ignore="UnknownId" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/shop"
+        android:id="@+id/ma_expenses_fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/money"
+        android:layout_above="@+id/ma_income_fab"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_marginEnd="25dp"

@@ -7,7 +7,7 @@
     tools:context=".About">
 
     <TextView
-        android:id="@+id/txtAbout"
+        android:id="@+id/about_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
@@ -20,7 +20,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/txtAbout"
+        android:layout_below="@+id/about_text"
         android:padding="15dp"
         android:text="Expense Manager is a mobile application that serves to
 assist users in managing their personal finances in order to be
