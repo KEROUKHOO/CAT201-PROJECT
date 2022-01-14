@@ -2,12 +2,14 @@ package com.example.expensemanager;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.google.android.material.datepicker.MaterialDatePicker;
@@ -22,6 +24,7 @@ public class Expenses extends AppCompatActivity {
     TextInputLayout textInputLayout;
     AutoCompleteTextView autoCompleteTextView;
     TextInputEditText textInputEditText;
+    Button button;
 
     ArrayList<String> expenses_category;
     ArrayAdapter<String> arrayAdapter;
@@ -34,6 +37,7 @@ public class Expenses extends AppCompatActivity {
         textInputLayout = (TextInputLayout) findViewById(R.id.expenses_menu_drop);
         autoCompleteTextView = (AutoCompleteTextView) findViewById(R.id.expenses_drop_items);
         textInputEditText = (TextInputEditText) findViewById(R.id.expenses_date_input);
+        button = findViewById(R.id.expenses_cancel_button);
 
         expenses_category = new ArrayList<>();
         expenses_category.add("Food");
@@ -60,5 +64,14 @@ public class Expenses extends AppCompatActivity {
                 });
             }
         });
+
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Expenses.this, MainActivity.class);
+                startActivity(intent);
+            }
+        });
+
     }
 }
