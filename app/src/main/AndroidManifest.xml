@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.expensemanager">
+    package="com.example.expense_manager">
 
     <application
         android:allowBackup="true"
@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ExpenseManager">
         <activity
-            android:name=".Splash"
+            android:name="com.example.expense_manager.Splash"
             android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -19,23 +19,23 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Income"
+            android:name="com.example.expense_manager.Income"
             android:label="Income"
-            android:parentActivityName=".MainActivity"
+            android:parentActivityName="com.example.expense_manager.MainActivity"
             android:exported="false" />
         <activity
-            android:name=".Expenses"
+            android:name="com.example.expense_manager.Expenses"
             android:label="Expenses"
-            android:parentActivityName=".MainActivity"
+            android:parentActivityName="com.example.expense_manager.MainActivity"
             android:exported="false" />
         <activity
-            android:name=".About"
+            android:name="com.example.expense_manager.About"
             android:exported="false" />
         <activity
-            android:name=".Dashboard"
+            android:name="com.example.expense_manager.Dashboard"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name="com.example.expense_manager.MainActivity"
             android:exported="true"/>
     </application>
 
@@ -46,7 +46,7 @@
 
 <!--<?xml version="1.0" encoding="utf-8"?>-->
 <!--<manifest xmlns:android="http://schemas.android.com/apk/res/android"-->
-<!--    package="com.example.expensemanager">-->
+<!--    package="com.example.expense_manager">-->
 
 <!--    <application-->
 <!--        android:allowBackup="true"-->
