@@ -90,12 +90,15 @@ public class UpdateActivity extends AppCompatActivity {
         // First we call this
         getAndSetIntentData();
 
+        //-------------------------------------------------------------------------------------------------
         // Set actionbar title after getAndSetIntentData method
         ActionBar ab = getSupportActionBar();
         if (ab != null) {
             ab.setTitle(income_name);
         }
+        //-------------------------------------------------------------------------------------------------
 
+        // Update Income
         inc_update_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -108,6 +111,8 @@ public class UpdateActivity extends AppCompatActivity {
                 myDB.updateData(income_id, income_name, income_amount, income_date, income_category);
             }
         });
+
+        // Delete Income
         inc_delete_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -117,6 +122,7 @@ public class UpdateActivity extends AppCompatActivity {
 
     }
 
+    // Update Income
     void getAndSetIntentData(){
         if (getIntent().hasExtra("income_id") && getIntent().hasExtra("income_name") &&
                 getIntent().hasExtra("income_amount") && getIntent().hasExtra("income_date") &&
@@ -139,6 +145,7 @@ public class UpdateActivity extends AppCompatActivity {
         }
     }
 
+    // Delete Income
     void confirmDialog(){
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Delete " + income_name + "?");
