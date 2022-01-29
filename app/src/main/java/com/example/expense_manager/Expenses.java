@@ -21,8 +21,11 @@ public class Expenses extends AppCompatActivity {
 
     TextInputLayout textInputLayout;
     AutoCompleteTextView autoCompleteTextView;
-    TextInputEditText textInputEditText;
-    Button button;
+
+    TextInputEditText expenses_date_input;
+    TextInputEditText expenses_name_input;
+    TextInputEditText expenses_amount_input;
+    Button cancel_button, save_button;
 
     ArrayList<String> expenses_category;
     ArrayAdapter<String> arrayAdapter;
@@ -32,10 +35,14 @@ public class Expenses extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_expenses);
 
+        expenses_name_input = (TextInputEditText) findViewById(R.id.expenses_name_input);
+        expenses_amount_input = (TextInputEditText) findViewById(R.id.expenses_amount_input);
+        save_button = findViewById(R.id.expenses_save_button);
+
         textInputLayout = (TextInputLayout) findViewById(R.id.expenses_menu_drop);
-        autoCompleteTextView = (AutoCompleteTextView) findViewById(R.id.expenses_drop_items);
-        textInputEditText = (TextInputEditText) findViewById(R.id.expenses_date_input);
-        button = findViewById(R.id.expenses_cancel_button);
+        autoCompleteTextView = (AutoCompleteTextView) findViewById(R.id.expenses_drop_items); //income_category
+        expenses_date_input = (TextInputEditText) findViewById(R.id.expenses_date_input);
+        cancel_button = findViewById(R.id.expenses_cancel_button);
 
         expenses_category = new ArrayList<>();
         expenses_category.add("Food");
@@ -49,21 +56,35 @@ public class Expenses extends AppCompatActivity {
         MaterialDatePicker.Builder builder = MaterialDatePicker.Builder.datePicker();
         MaterialDatePicker picker = builder.build();
 
-        textInputEditText.setKeyListener(null);
-        textInputEditText.setOnClickListener(new View.OnClickListener() {
+        expenses_date_input.setKeyListener(null);
+        expenses_date_input.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 picker.show( getSupportFragmentManager(), "DATE_PICKER" );
                 picker.addOnPositiveButtonClickListener(new MaterialPickerOnPositiveButtonClickListener() {
                     @Override
                     public void onPositiveButtonClick(Object selection) {
-                        textInputEditText.setText(picker.getHeaderText());
+                        expenses_date_input.setText(picker.getHeaderText());
                     }
                 });
             }
         });
 
-        button.setOnClickListener(new View.OnClickListener() {
+        // Save Button
+        save_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ExpensesDatabase myDB = new ExpensesDatabase(Expenses.this);
+                int index = 0;
+                myDB.addExpenses(expenses_name_input.getText().toString().trim(),
+                        Double.parseDouble(expenses_amount_input.getText().toString()),
+                        //income_amount_input.getText().toString().trim(),
+                        expenses_date_input.getText().toString().trim(),
+                        autoCompleteTextView.getText().toString().trim());
+            }
+        });
+
+        cancel_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(Expenses.this, MainActivity.class);

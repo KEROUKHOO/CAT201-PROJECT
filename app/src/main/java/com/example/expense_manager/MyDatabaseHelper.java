@@ -22,6 +22,7 @@ class MyDatabaseHelper extends SQLiteOpenHelper {
     private static final String INCOME_COLUMN_DATE = "income_date";
     private static final String INCOME_COLUMN_CATEGORY = "income_category";
 
+
     MyDatabaseHelper(@Nullable Context context) {
         super(context, INCOME_DATABASE_NAME, null, INCOME_DATABASE_VERSION);
         this.context = context;
