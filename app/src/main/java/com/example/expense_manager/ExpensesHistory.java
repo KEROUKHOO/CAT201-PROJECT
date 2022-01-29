@@ -1,23 +1,17 @@
 package com.example.expense_manager;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.widget.Button;
 import android.widget.Toast;
 
 import com.example.expense_manager.R;
@@ -26,20 +20,18 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity {
+public class ExpensesHistory extends AppCompatActivity {
 
     BottomNavigationView bottomNavigationView;
 
-    // Income Recycler View
     RecyclerView recyclerView;
 
-    // Expenses Recycler View
-    Button switch_button;
-
     //Display Data in Recycler View
-    MyDatabaseHelper myDB;
-    ArrayList<String> inc_id, inc_name, inc_amount, inc_date, inc_category;
-    CustomAdapter customAdapter;
+
+    ExpensesDatabase myExpensesDB;
+
+    ArrayList<String> exp_id, exp_name, exp_amount, exp_date, exp_category;
+    CustomExpensesAdapter customExpensesAdapter;
 
     //fab1 is plus
     //fab2 is income
@@ -50,25 +42,35 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_expense_history);
 
-        recyclerView = findViewById(R.id.recyclerView); // Income
-        switch_button = findViewById(R.id.switchButton);    // Expenses
+        recyclerView = findViewById(R.id.recyclerView);
 
-        // Display Data in recycler View
-        myDB = new MyDatabaseHelper(MainActivity.this);
-        inc_id = new ArrayList<>();
-        inc_name = new ArrayList<>();
-        inc_amount = new ArrayList<>();
-        inc_date = new ArrayList<>();
-        inc_category = new ArrayList<>();
+        // Display Income Data in recycler View
+        myExpensesDB = new ExpensesDatabase(ExpensesHistory.this);
+        exp_id = new ArrayList<>();
+        exp_name = new ArrayList<>();
+        exp_amount = new ArrayList<>();
+        exp_date = new ArrayList<>();
+        exp_category = new ArrayList<>();
+        /*
+        // Display Expenses Data in recycler View
+        myExpensesDB = new ExpensesDatabase(MainActivity.this);
+        exp_id = new ArrayList<>();
+        exp_name = new ArrayList<>();
+        exp_amount = new ArrayList<>();
+        exp_date = new ArrayList<>();
+        exp_category = new ArrayList<>();
+
+         */
 
         storeDataInArrays();
+        //storeExpensesDataInArrays();
 
-        customAdapter = new CustomAdapter(MainActivity.this, MainActivity.this,
-                inc_id, inc_name, inc_amount, inc_date, inc_category);
-        recyclerView.setAdapter(customAdapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(MainActivity.this));
+        customExpensesAdapter = new CustomExpensesAdapter(ExpensesHistory.this, exp_id, exp_name, exp_amount,
+                exp_date, exp_category);
+        recyclerView.setAdapter(customExpensesAdapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(ExpensesHistory.this));
 
         //-------------------------------------------------------------------------------------------
 
@@ -101,20 +103,11 @@ public class MainActivity extends AppCompatActivity {
         fab2 = findViewById(R.id.ma_income_fab);
         fab3 = findViewById(R.id.ma_expenses_fab);
 
-        // Switch Button
-        switch_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, ExpensesHistory.class);
-                startActivity(intent);
-            }
-        });
-
         // fab2 is income
         fab2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, Income.class);
+                Intent intent = new Intent(ExpensesHistory.this, Income.class);
                 startActivity(intent);
             }
         });
@@ -123,7 +116,7 @@ public class MainActivity extends AppCompatActivity {
         fab3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, Expenses.class);
+                Intent intent = new Intent(ExpensesHistory.this, Expenses.class);
                 startActivity(intent);
             }
         });
@@ -158,72 +151,23 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
-    }
-//------------------------------------------------------------------------------------------------------
-    // Update Income in Recycler View
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == 1){
-             recreate();
-        }
+
     }
 
     // Display Data in Recycler View
     void storeDataInArrays(){
-        Cursor cursor = myDB.readAllData();
-        if (cursor.getCount() == 0){
+        Cursor expensesCursor = myExpensesDB.readAllExpensesData();
+        if (expensesCursor.getCount() == 0){
             Toast.makeText(this, "No data.", Toast.LENGTH_SHORT).show();
         }else{
-            while (cursor.moveToNext()){
-                inc_id.add(cursor.getString(0));
-                inc_name.add(cursor.getString(1));
-                inc_amount.add(cursor.getString(2));
-                inc_date.add(cursor.getString(3));
-                inc_category.add(cursor.getString(4));
+            while (expensesCursor.moveToNext()){
+                exp_id.add(expensesCursor.getString(0));
+                exp_name.add(expensesCursor.getString(1));
+                exp_amount.add(expensesCursor.getString(2));
+                exp_date.add(expensesCursor.getString(3));
+                exp_category.add(expensesCursor.getString(4));
             }
         }
     }
 
-//-------------------------------------------------------------------------------------------------------------
-    // Income Delete All - Show Icon
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.my_menu, menu);
-        return super.onCreateOptionsMenu(menu);
-    }
-
-    // Income Delete All - Show Message
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        if(item.getItemId() == R.id.inc_delete_all){
-            confirmDialog();
-        }
-        return super.onOptionsItemSelected(item);
-    }
-
-    void confirmDialog(){
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Delete All?");
-        builder.setMessage("Are you sure you want to delete all Data?");
-        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                MyDatabaseHelper myDB = new MyDatabaseHelper(MainActivity.this);
-                myDB.deleteAllIncome();
-                // Refresh Activity (Recycler View)
-                Intent intent = new Intent(MainActivity.this, MainActivity.class);
-                startActivity(intent);
-                finish();
-            }
-        });
-        builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-
-            }
-        });
-        builder.create().show();
-    }
 }
