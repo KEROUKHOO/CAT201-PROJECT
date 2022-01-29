@@ -4,7 +4,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.expense_manager.Dashboard">
+    tools:context=".Dashboard">
+
+    <com.anychart.AnyChartView
+        android:id="@+id/chart"
+        android:layout_width="350dp"
+        android:layout_height="610dp"
+        android:layout_above="@+id/bottom_navigator"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="33dp"
+        android:layout_marginEnd="28dp"
+        android:layout_marginBottom="34dp" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:layout_width="match_parent"

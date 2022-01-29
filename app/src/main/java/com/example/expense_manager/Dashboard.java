@@ -7,16 +7,31 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 
-//import com.example.expensemanager.R;
+import com.anychart.AnyChart;
+import com.anychart.AnyChartView;
+import com.anychart.chart.common.dataentry.DataEntry;
+import com.anychart.chart.common.dataentry.ValueDataEntry;
+import com.anychart.charts.Pie;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class Dashboard extends AppCompatActivity {
 
     BottomNavigationView bottomNavigationView;
+    AnyChartView chart;
+    String[] expenses = {"Food", "Transport", "Bill"};
+    float[] total_amount = {1000, 800, 632};
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard);
+
+        chart = findViewById(R.id.chart);
+
+        setupChart();
 
         bottomNavigationView = findViewById(R.id.bottom_navigator);
         bottomNavigationView.setSelectedItemId(R.id.dashboard);
@@ -42,6 +57,20 @@ public class Dashboard extends AppCompatActivity {
                 return false;
             }
         });
+
+    }
+
+    private void setupChart() {
+        Pie pie = AnyChart.pie();
+        List<DataEntry> dataEntries = new ArrayList<>();
+
+        for (int i = 0; i < total_amount.length; i++){
+            dataEntries.add(new ValueDataEntry(expenses[i], total_amount[i]));
+        }
+
+        pie.data(dataEntries);
+        pie.title("Expenses");
+        chart.setChart(pie);
 
     }
 }
