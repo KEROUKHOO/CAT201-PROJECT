@@ -101,4 +101,10 @@ class MyDatabaseHelper extends SQLiteOpenHelper {
             Toast.makeText(context, "Successfully Deleted.", Toast.LENGTH_SHORT).show();
         }
     }
+
+    // Delete All Income
+    void deleteAllIncome(){
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.execSQL("DELETE FROM " + INCOME_TABLE_NAME);
+    }
 }
