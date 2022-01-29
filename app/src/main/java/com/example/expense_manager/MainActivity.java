@@ -1,6 +1,7 @@
 package com.example.expense_manager;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -54,8 +55,8 @@ public class MainActivity extends AppCompatActivity {
 
         storeDataInArrays();
 
-        customAdapter = new CustomAdapter(MainActivity.this, inc_id, inc_name, inc_amount,
-                inc_date, inc_category);
+        customAdapter = new CustomAdapter(MainActivity.this, MainActivity.this,
+                inc_id, inc_name, inc_amount, inc_date, inc_category);
         recyclerView.setAdapter(customAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(MainActivity.this));
 
@@ -138,7 +139,15 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
-
+    }
+//------------------------------------------------------------------------------------------------------
+    // Update Income in Recycler View
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 1){
+             recreate();
+        }
     }
 
     // Display Data in Recycler View

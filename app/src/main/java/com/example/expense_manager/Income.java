@@ -23,9 +23,7 @@ public class Income extends AppCompatActivity {
     TextInputLayout textInputLayout;
     AutoCompleteTextView autoCompleteTextView;
 
-    TextInputEditText income_date_input;
-    TextInputEditText income_name_input;
-    TextInputEditText income_amount_input;
+    TextInputEditText income_date_input, income_name_input, income_amount_input;
     Button cancel_button, save_button;
 
     ArrayList<String> income_category;
@@ -45,6 +43,7 @@ public class Income extends AppCompatActivity {
         income_date_input = (TextInputEditText) findViewById(R.id.income_date_input);
         cancel_button = findViewById(R.id.income_cancel_button);
 
+        // Income Category
         income_category = new ArrayList<>();
         income_category.add("Salary");
         income_category.add("Bonus");
@@ -54,6 +53,7 @@ public class Income extends AppCompatActivity {
 
         autoCompleteTextView.setThreshold(1);
 
+        // Income Date
         MaterialDatePicker.Builder builder = MaterialDatePicker.Builder.datePicker();
         MaterialDatePicker picker = builder.build();
 
@@ -76,10 +76,8 @@ public class Income extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 MyDatabaseHelper myDB = new MyDatabaseHelper(Income.this);
-                int index = 0;
                 myDB.addIncome(income_name_input.getText().toString().trim(),
                         Double.parseDouble(income_amount_input.getText().toString()),
-                        //income_amount_input.getText().toString().trim(),
                         income_date_input.getText().toString().trim(),
                         autoCompleteTextView.getText().toString().trim());
             }
