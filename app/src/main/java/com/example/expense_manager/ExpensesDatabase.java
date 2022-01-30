@@ -94,4 +94,21 @@ class ExpensesDatabase extends SQLiteOpenHelper {
             Toast.makeText(context, "Successfully Updated!", Toast.LENGTH_SHORT).show();
         }
     }
+
+    // Delete Expenses
+    void deleteExpensesOneRow(String expenses_row_id){
+        SQLiteDatabase db = this.getWritableDatabase();
+        long result = db.delete(TABLE_EXPENSES, "Expenses_id=?", new String[]{expenses_row_id});
+        if (result == -1){
+            Toast.makeText(context, "Failed to Delete.", Toast.LENGTH_SHORT).show();
+        }else{
+            Toast.makeText(context, "Successfully Deleted.", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    // Delete All Expenses
+    void deleteAllExpensesData(){
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.execSQL("DELETE FROM " + TABLE_EXPENSES);
+    }
 }

@@ -105,5 +105,4 @@
         android:focusable="true"
         android:text="Income" />
 
-
 </RelativeLayout>

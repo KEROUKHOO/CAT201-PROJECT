@@ -1,7 +1,10 @@
 package com.example.expense_manager;
 
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -24,7 +27,7 @@ public class UpdateExpensesActivity extends AppCompatActivity {
     AutoCompleteTextView autoCompleteTextView;
 
     TextInputEditText expenses_name_input, expenses_amount_input, expenses_date_input;
-    Button expenses_update_button;
+    Button expenses_update_button, expenses_delete_button;
 
     String expenses_id, expenses_name, expenses_date, expenses_category;
 
@@ -43,6 +46,7 @@ public class UpdateExpensesActivity extends AppCompatActivity {
         expenses_name_input = (TextInputEditText) findViewById(R.id.expenses_name_input2);
         expenses_amount_input = (TextInputEditText) findViewById(R.id.expenses_amount_input2);
         expenses_update_button = findViewById(R.id.expenses_update_button);
+        expenses_delete_button = findViewById(R.id.expenses_delete_button);
 
         textInputLayout = (TextInputLayout) findViewById(R.id.expenses_menu_drop);
         autoCompleteTextView = (AutoCompleteTextView) findViewById(R.id.expenses_drop_items2); //expenses_category
@@ -55,7 +59,6 @@ public class UpdateExpensesActivity extends AppCompatActivity {
         exp_category.add("Transport");
         exp_category.add("Shopping");
         exp_category.add("Entertainment");
-        exp_category.add("Bills");
         exp_category.add("Other");
 
         arrayAdapter = new ArrayAdapter<>(getApplication(), R.layout.list_item, exp_category);
@@ -81,10 +84,18 @@ public class UpdateExpensesActivity extends AppCompatActivity {
             }
         });
 //---------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------
 
         // First we call this
         // Click Data to Pop-Up An Update Window
         getAndSetIntentDataExpenses();
+
+        // Set actionbar title after getAndSetIntentDataExpenses method
+        // -- Title of Pop-Up Window of Every Data Is The Data's Title
+        ActionBar ab = getSupportActionBar();
+        if (ab != null) {
+            ab.setTitle(expenses_name);
+        }
 
         // Update Expenses Button
         expenses_update_button.setOnClickListener(new View.OnClickListener() {
@@ -98,6 +109,14 @@ public class UpdateExpensesActivity extends AppCompatActivity {
                 expenses_category = autoCompleteTextView.getText().toString().trim();
                 myExpenseDB.updateExpensesData(expenses_id, expenses_name, expenses_amount,
                         expenses_date, expenses_category);
+            }
+        });
+
+        // Delete Expenses Button
+        expenses_delete_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                confirmDialog();
             }
         });
 
@@ -124,5 +143,27 @@ public class UpdateExpensesActivity extends AppCompatActivity {
         }else{
             Toast.makeText(this, "No Data.", Toast.LENGTH_SHORT).show();
         }
+    }
+
+    // Delete Expenses -- Show Message
+    void confirmDialog(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Delete " + expenses_name + " ?");
+        builder.setMessage("Are you sure you want to delete " + expenses_name + " ?");
+        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                ExpensesDatabase myExpenseDB = new ExpensesDatabase(UpdateExpensesActivity.this);
+                myExpenseDB.deleteExpensesOneRow(expenses_id);
+                finish();       // Close Current Activity & Get Back to Expenses History Recycler View
+            }
+        });
+        builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+
+            }
+        });
+        builder.create().show();
     }
 }

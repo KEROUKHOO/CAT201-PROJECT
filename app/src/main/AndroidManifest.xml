@@ -11,7 +11,8 @@
         android:theme="@style/Theme.ExpenseManager">
         <activity
             android:name=".UpdateExpensesActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:parentActivityName=".ExpensesHistory"/>
         <activity
             android:name=".UpdateActivity"
             android:exported="false"

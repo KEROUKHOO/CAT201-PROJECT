@@ -50,7 +50,6 @@ public class Expenses extends AppCompatActivity {
         expenses_category.add("Transport");
         expenses_category.add("Shopping");
         expenses_category.add("Entertainment");
-        expenses_category.add("Bills");
         expenses_category.add("Other");
 
         arrayAdapter = new ArrayAdapter<>(getApplication(), R.layout.list_item, expenses_category);

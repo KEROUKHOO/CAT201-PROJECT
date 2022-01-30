@@ -2,18 +2,23 @@ package com.example.expense_manager;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.expense_manager.R;
@@ -49,8 +54,8 @@ public class ExpensesHistory extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_expense_history);
 
-        recyclerView = findViewById(R.id.recyclerView);
-        income_button = findViewById(R.id.incomeButton);
+        recyclerView = findViewById(R.id.recyclerView);     // Income
+        income_button = findViewById(R.id.incomeButton);    // Expenses
 
         // Display Income Data in recycler View
         myExpensesDB = new ExpensesDatabase(ExpensesHistory.this);
@@ -186,4 +191,44 @@ public class ExpensesHistory extends AppCompatActivity {
         }
     }
 
+    // Expenses Delete All -- Show Icon
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.expenses_menu, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    // Delete All Expenses -- Show Message
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if (item.getItemId() == R.id.exp_delete_all){
+            confirmDialog();
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    void confirmDialog(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Delete All?");
+        builder.setMessage("Are you sure you want to delete all Data?");
+        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                ExpensesDatabase myExpensesDB = new ExpensesDatabase(ExpensesHistory.this);
+                myExpensesDB.deleteAllExpensesData();
+                // Refresh Activity Recycler View
+                Intent intent = new Intent(ExpensesHistory.this, ExpensesHistory.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+        builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+
+            }
+        });
+        builder.create().show();
+    }
 }

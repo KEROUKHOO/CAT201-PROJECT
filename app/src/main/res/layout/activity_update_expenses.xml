@@ -147,11 +147,11 @@
         app:layout_constraintVertical_bias="0.531" />
 
     <Button
-        android:id="@+id/expenses_cancel_button"
+        android:id="@+id/expenses_delete_button"
         style="@style/Widget.MaterialComponents.Button.OutlinedButton.Icon"
         android:layout_width="110dp"
         android:layout_height="55dp"
-        android:text="CANCEL"
+        android:text="Delete"
         app:layout_constraintBottom_toTopOf="@+id/guideline2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/expenses_update_button"

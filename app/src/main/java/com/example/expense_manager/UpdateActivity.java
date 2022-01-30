@@ -147,7 +147,7 @@ public class UpdateActivity extends AppCompatActivity {
         }
     }
 
-    // Delete Income
+    // Delete Income -- Show Message
     void confirmDialog(){
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Delete " + income_name + "?");
