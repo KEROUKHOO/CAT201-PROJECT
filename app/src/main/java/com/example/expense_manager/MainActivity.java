@@ -173,7 +173,7 @@ public class MainActivity extends AppCompatActivity {
     void storeDataInArrays(){
         Cursor cursor = myDB.readAllData();
         if (cursor.getCount() == 0){
-            Toast.makeText(this, "No data.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "No Income Data.", Toast.LENGTH_SHORT).show();
         }else{
             while (cursor.moveToNext()){
                 inc_id.add(cursor.getString(0));
@@ -206,7 +206,7 @@ public class MainActivity extends AppCompatActivity {
     void confirmDialog(){
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Delete All?");
-        builder.setMessage("Are you sure you want to delete all Data?");
+        builder.setMessage("Are you sure you want to delete all Income Data?");
         builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {

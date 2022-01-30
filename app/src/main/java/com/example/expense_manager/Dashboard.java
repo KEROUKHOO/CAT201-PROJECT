@@ -21,8 +21,8 @@ public class Dashboard extends AppCompatActivity {
 
     BottomNavigationView bottomNavigationView;
     AnyChartView chart;
-    String[] expenses = {"Food", "Transport", "Bill"};
-    float[] total_amount = {1000, 800, 632};
+    String[] expenses = {"Food", "Transport", "Shopping", "Entertainment", "Other"};
+    float[] total_amount = {1000, 800, 632, 234, 123};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

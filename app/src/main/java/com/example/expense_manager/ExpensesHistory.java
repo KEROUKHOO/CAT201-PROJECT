@@ -179,7 +179,7 @@ public class ExpensesHistory extends AppCompatActivity {
     void storeDataInArrays(){
         Cursor expensesCursor = myExpensesDB.readAllExpensesData();
         if (expensesCursor.getCount() == 0){
-            Toast.makeText(this, "No data.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "No Expenses Data.", Toast.LENGTH_SHORT).show();
         }else{
             while (expensesCursor.moveToNext()){
                 exp_id.add(expensesCursor.getString(0));
@@ -211,7 +211,7 @@ public class ExpensesHistory extends AppCompatActivity {
     void confirmDialog(){
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Delete All?");
-        builder.setMessage("Are you sure you want to delete all Data?");
+        builder.setMessage("Are you sure you want to delete all Expenses Data?");
         builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
