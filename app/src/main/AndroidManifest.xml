@@ -10,14 +10,16 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ExpenseManager">
         <activity
+            android:name=".UpdateExpensesActivity"
+            android:exported="false" />
+        <activity
             android:name=".UpdateActivity"
             android:exported="false"
-            android:parentActivityName=".MainActivity"/>
+            android:parentActivityName=".MainActivity" />
         <activity
             android:name=".ExpensesHistory"
             android:exported="false"
-            android:label="Expenses History"
-            android:parentActivityName=".MainActivity"/>
+            android:label="Expenses History" />
         <activity
             android:name=".Splash"
             android:exported="true">

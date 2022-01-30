@@ -23,14 +23,7 @@ class ExpensesDatabase extends SQLiteOpenHelper {
     private static final String EXPENSES_DATE = "Expenses_Date";
     private static final String EXPENSES_CATEGORY = "Expenses_Category";
 
-    /*
-    private static final String CREATE_TABLE_INCOME = "CREATE TABLE " + TABLE_INCOME +
-            " (" + INCOME_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
-            INCOME_NAME + " TEXT, " +
-            INCOME_AMOUNT + " REAL, " +
-            INCOME_DATE + " TEXT, " +
-            INCOME_CATEGORY + " TEXT);";
-    */
+
     private static final String CREATE_TABLE_EXPENSES = "CREATE TABLE " + TABLE_EXPENSES +
             " (" + EXPENSES_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
             EXPENSES_NAME + " TEXT, " +
@@ -38,25 +31,14 @@ class ExpensesDatabase extends SQLiteOpenHelper {
             EXPENSES_DATE + " TEXT, " +
             EXPENSES_CATEGORY + " TEXT);";
 
-    public ExpensesDatabase(@Nullable Context context) {
+    ExpensesDatabase(@Nullable Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
-        //this.context = context;
+        this.context = context;
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        //db.execSQL(CREATE_TABLE_INCOME);
         db.execSQL(CREATE_TABLE_EXPENSES);
-        /*
-        String query =
-                "CREATE TABLE " + TABLE_NAME +
-                        " (" + COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                        COLUMN_NAME + " TEXT, " +
-                        COLUMN_AMOUNT + " REAL, " +
-                        COLUMN_DATE + " TEXT, " +
-                        COLUMN_CATEGORY + " TEXT);";
-        db.execSQL(query);
-        */
 
     }
 
@@ -66,24 +48,6 @@ class ExpensesDatabase extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_EXPENSES);
         onCreate(db);
     }
-
-    /*void addIncome(String income_name, double income_amount, String income_date, String income_category){
-        SQLiteDatabase db = this.getWritableDatabase();
-        ContentValues cv = new ContentValues();
-
-        cv.put(INCOME_NAME, income_name);
-        cv.put(INCOME_AMOUNT, income_amount);
-        cv.put(INCOME_DATE, income_date);
-        cv.put(INCOME_CATEGORY, income_category);
-        long result = db.insert(TABLE_INCOME, null, cv);
-        if(result == -1){
-            Toast.makeText(context, "Failed", Toast.LENGTH_SHORT).show();
-        }else {
-            Toast.makeText(context, "Added Successfully!", Toast.LENGTH_SHORT).show();
-        }
-    }
-
-     */
 
     void addExpenses(String expenses_name, double expenses_amount, String expenses_date, String expenses_category){
         SQLiteDatabase db = this.getWritableDatabase();
@@ -111,5 +75,23 @@ class ExpensesDatabase extends SQLiteOpenHelper {
             cursor = db.rawQuery(query, null);
         }
         return cursor;
+    }
+
+    // Passing data to Update Expenses
+    void updateExpensesData(String expenses_row_id, String expenses_name, double expenses_amount,
+                            String expenses_date, String expenses_category){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+        cv.put(EXPENSES_NAME, expenses_name);
+        cv.put(EXPENSES_AMOUNT, expenses_amount);
+        cv.put(EXPENSES_DATE, expenses_date);
+        cv.put(EXPENSES_CATEGORY, expenses_category);
+
+        long result = db.update(TABLE_EXPENSES, cv, "Expenses_id=?", new String[]{expenses_row_id});
+        if (result == -1){
+            Toast.makeText(context, "Failed to Update.", Toast.LENGTH_SHORT).show();
+        }else{
+            Toast.makeText(context, "Successfully Updated!", Toast.LENGTH_SHORT).show();
+        }
     }
 }

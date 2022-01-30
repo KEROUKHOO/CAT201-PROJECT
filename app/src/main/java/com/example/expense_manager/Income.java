@@ -47,6 +47,8 @@ public class Income extends AppCompatActivity {
         income_category = new ArrayList<>();
         income_category.add("Salary");
         income_category.add("Bonus");
+        income_category.add("Investment");
+        income_category.add("Other");
 
         arrayAdapter = new ArrayAdapter<>(getApplication(), R.layout.list_item, income_category);
         autoCompleteTextView.setAdapter(arrayAdapter);

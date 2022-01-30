@@ -33,7 +33,8 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
         this.inc_category = inc_category;
     }
 
-    public CustomAdapter(MainActivity activity, ArrayList<String> inc_id, ArrayList<String> inc_name, ArrayList<String> inc_amount, ArrayList<String> inc_date, ArrayList<String> inc_category) {
+    public CustomAdapter(MainActivity activity, ArrayList<String> inc_id, ArrayList<String> inc_name,
+                         ArrayList<String> inc_amount, ArrayList<String> inc_date, ArrayList<String> inc_category) {
     }
 
     @NonNull

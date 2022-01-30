@@ -56,6 +56,8 @@ public class UpdateActivity extends AppCompatActivity {
         inc_category = new ArrayList<>();
         inc_category.add("Salary");
         inc_category.add("Bonus");
+        inc_category.add("Investment");
+        inc_category.add("Other");
 
         arrayAdapter = new ArrayAdapter<>(getApplication(), R.layout.list_item, inc_category);
         autoCompleteTextView.setAdapter(arrayAdapter);

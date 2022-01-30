@@ -40,19 +40,25 @@ public class Expenses extends AppCompatActivity {
         save_button = findViewById(R.id.expenses_save_button);
 
         textInputLayout = (TextInputLayout) findViewById(R.id.expenses_menu_drop);
-        autoCompleteTextView = (AutoCompleteTextView) findViewById(R.id.expenses_drop_items); //income_category
+        autoCompleteTextView = (AutoCompleteTextView) findViewById(R.id.expenses_drop_items); //expenses_category
         expenses_date_input = (TextInputEditText) findViewById(R.id.expenses_date_input);
         cancel_button = findViewById(R.id.expenses_cancel_button);
 
+        // Expenses Category
         expenses_category = new ArrayList<>();
         expenses_category.add("Food");
         expenses_category.add("Transport");
+        expenses_category.add("Shopping");
+        expenses_category.add("Entertainment");
+        expenses_category.add("Bills");
+        expenses_category.add("Other");
 
         arrayAdapter = new ArrayAdapter<>(getApplication(), R.layout.list_item, expenses_category);
         autoCompleteTextView.setAdapter(arrayAdapter);
 
         autoCompleteTextView.setThreshold(1);
 
+        // Expenses Date
         MaterialDatePicker.Builder builder = MaterialDatePicker.Builder.datePicker();
         MaterialDatePicker picker = builder.build();
 
@@ -74,16 +80,15 @@ public class Expenses extends AppCompatActivity {
         save_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ExpensesDatabase myDB = new ExpensesDatabase(Expenses.this);
-                int index = 0;
-                myDB.addExpenses(expenses_name_input.getText().toString().trim(),
+                ExpensesDatabase myExpensesDB = new ExpensesDatabase(Expenses.this);
+                myExpensesDB.addExpenses(expenses_name_input.getText().toString().trim(),
                         Double.parseDouble(expenses_amount_input.getText().toString()),
-                        //income_amount_input.getText().toString().trim(),
                         expenses_date_input.getText().toString().trim(),
                         autoCompleteTextView.getText().toString().trim());
             }
         });
 
+        // Cancel Button
         cancel_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

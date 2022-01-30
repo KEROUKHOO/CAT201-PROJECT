@@ -74,7 +74,7 @@ class MyDatabaseHelper extends SQLiteOpenHelper {
         return cursor;
     }
 
-    // Update Income
+    // Passing Data to Update Income
     void updateData (String income_row_id, String income_name, double income_amount,
                      String income_date, String income_category){
         SQLiteDatabase db = this.getWritableDatabase();

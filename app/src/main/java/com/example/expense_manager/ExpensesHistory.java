@@ -1,6 +1,7 @@
 package com.example.expense_manager;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -53,21 +54,10 @@ public class ExpensesHistory extends AppCompatActivity {
         exp_amount = new ArrayList<>();
         exp_date = new ArrayList<>();
         exp_category = new ArrayList<>();
-        /*
-        // Display Expenses Data in recycler View
-        myExpensesDB = new ExpensesDatabase(MainActivity.this);
-        exp_id = new ArrayList<>();
-        exp_name = new ArrayList<>();
-        exp_amount = new ArrayList<>();
-        exp_date = new ArrayList<>();
-        exp_category = new ArrayList<>();
-
-         */
 
         storeDataInArrays();
-        //storeExpensesDataInArrays();
 
-        customExpensesAdapter = new CustomExpensesAdapter(ExpensesHistory.this, exp_id, exp_name, exp_amount,
+        customExpensesAdapter = new CustomExpensesAdapter(ExpensesHistory.this, this, exp_id, exp_name, exp_amount,
                 exp_date, exp_category);
         recyclerView.setAdapter(customExpensesAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(ExpensesHistory.this));
@@ -152,6 +142,18 @@ public class ExpensesHistory extends AppCompatActivity {
             }
         });
 
+    }
+
+
+//------------------------------------------------------------------------------------------------------
+
+    // Refresh Expenses History Recycler View
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 1){
+            recreate();
+        }
     }
 
     // Display Data in Recycler View
