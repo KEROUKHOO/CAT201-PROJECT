@@ -13,6 +13,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.example.expense_manager.R;
@@ -26,6 +27,9 @@ public class ExpensesHistory extends AppCompatActivity {
     BottomNavigationView bottomNavigationView;
 
     RecyclerView recyclerView;
+
+    // Income Recycler View Button
+    Button income_button;
 
     //Display Data in Recycler View
 
@@ -46,6 +50,7 @@ public class ExpensesHistory extends AppCompatActivity {
         setContentView(R.layout.activity_expense_history);
 
         recyclerView = findViewById(R.id.recyclerView);
+        income_button = findViewById(R.id.incomeButton);
 
         // Display Income Data in recycler View
         myExpensesDB = new ExpensesDatabase(ExpensesHistory.this);
@@ -92,6 +97,15 @@ public class ExpensesHistory extends AppCompatActivity {
         fab1 = findViewById(R.id.ma_add_fab);
         fab2 = findViewById(R.id.ma_income_fab);
         fab3 = findViewById(R.id.ma_expenses_fab);
+
+        // Income Button
+        income_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(ExpensesHistory.this, MainActivity.class);
+                startActivity(intent);
+            }
+        });
 
         // fab2 is income
         fab2.setOnClickListener(new View.OnClickListener() {
