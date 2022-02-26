@@ -13,8 +13,8 @@ Nowadays, people tend to spend money without being aware of their expenses. They
 
 ## References
 * Material Components
-Material Components for Android (MDC-Android) help developers execute Material Design to build beautiful and functional ANdroid apps.
+  Material Components for Android (MDC-Android) help developers execute Material Design to build beautiful and functional ANdroid apps.
 * AnyChart for Android
-AnyChart Android Chart is an amazing data visualization library for easily creating interactive charts in Android apps. It runs on API 19+ (Android 4.4) and features dozens of built-in chart types.
+  AnyChart Android Chart is an amazing data visualization library for easily creating interactive charts in Android apps. It runs on API 19+ (Android 4.4) and features dozens of built-in chart types.
 * SQLite
-SQLite is a C-language library that implements a small, fast, self-contained, high-reliability, full-featured, SQL database engine.
+  SQLite is a C-language library that implements a small, fast, self-contained, high-reliability, full-featured, SQL database engine.
