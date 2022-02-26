@@ -2,7 +2,7 @@
 
 ----
 
-##Program Description
+## Program Description
 Nowadays, people tend to spend money without being aware of their expenses. They do not have the habit of tracking their spendings as they find it a hassle to do so. As cash flow cannot be seen, this can grow bad spending habits unconsciously and will then lead to poor finance management. Hence, our group has developed an application which is Expense Manager. It is a mobile application that serves to assist users in managing their personal finances in order to be financially secure. Designed to be user-friendly, users will find Expense Manager very easy to use. Users will be able to keep track of all their income and expenses regardless of time and place. They can easily record, update or delete their incomes and expenses via Expense Manager. A pie chart will be generated based on their expenses showing their spending habits on different categories. It helps users to manage their expenses in an easier and more organised way thus providing them a clearer picture of their spending habits. Besides that, they will also have a better insight into their financial status. 
 
 ## Contribution
